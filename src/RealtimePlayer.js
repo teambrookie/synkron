@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import plyr from 'plyr';
-import './Plyr.css';
+import './RealtimePlayer.css';
 
 
-class Plyr extends Component {
+class RealtimePlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {currentTime: '', playing: false};
@@ -37,4 +37,4 @@ class Plyr extends Component {
   }
 }
 
-export default Plyr;
+export default RealtimePlayer;
