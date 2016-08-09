@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import plyr from 'plyr';
-import './RealtimePlayer.css';
+import 'plyr/dist/plyr.css';
 
 
 class RealtimePlayer extends Component {
