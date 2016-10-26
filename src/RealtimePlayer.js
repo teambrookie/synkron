@@ -19,20 +19,21 @@ class RealtimePlayer extends Component {
   }
   componentDidMount() {
     firebase.database().ref('/player/playing').on('value', snap => {
-      if (snap.val()) {
+      let playing = snap.val();
+      if (playing) {
+        this.setState({playing:playing})
         this.refs.plyr.plyr.play();
       } else {
+          this.setState({playing:playing})
         this.refs.plyr.plyr.pause();
       }
-      console.log(snap.val());
+      console.log(playing);
     });
 
 
     let options = {controls: [], clickToPlay: false, }
     let player = plyr.setup(this.refs.plyr,options)[0];
     player.addEventListener('timeupdate', this.handleTimeUpdate);
-    player.addEventListener('play',this.handlePlayerStateUpdate);
-    player.addEventListener('pause',this.handlePlayerStateUpdate);
   }
   handleTimeUpdate(e) {
     let currentTime = this.refs.plyr.plyr.getCurrentTime();

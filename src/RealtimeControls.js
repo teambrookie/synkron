@@ -9,10 +9,10 @@ class RealtimeControls extends Component {
   }
 
   handlePlay() {
-    firebase.database().ref('player').set({playing:true});
+    firebase.database().ref('player/playing').set(true);
   }
   handlePause() {
-    firebase.database().ref('player').set({playing:false});
+    firebase.database().ref('player/playing').set(false);
   }
 
   render () {
