@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import plyr from 'plyr';
 import 'plyr/dist/plyr.css';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 import RealtimeControls from './RealtimeControls';
 
 
@@ -9,18 +9,15 @@ class RealtimePlayer extends Component {
   constructor(props) {
     super(props);
     // Initialize Firebase
-    const config = {
-      apiKey: "AIzaSyArZwW-cQlrhLBJnxaIHlA1jyQVsoUgS8Q",
-      authDomain: "realtime-player.firebaseapp.com",
-      databaseURL: "https://realtime-player.firebaseio.com",
-      storageBucket: "realtime-player.appspot.com",
-    };
-    firebase.initializeApp(config);
+
 
     this.state = {currentTime: '', playing: false};
     this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
     this.handlePlayerStateUpdate = this.handlePlayerStateUpdate.bind(this);
 
+
+  }
+  componentDidMount() {
     firebase.database().ref('/player/playing').on('value', snap => {
       if (snap.val()) {
         this.refs.plyr.plyr.play();
@@ -29,8 +26,8 @@ class RealtimePlayer extends Component {
       }
       console.log(snap.val());
     });
-  }
-  componentDidMount() {
+
+
     let options = {controls: [], clickToPlay: false, }
     let player = plyr.setup(this.refs.plyr,options)[0];
     player.addEventListener('timeupdate', this.handleTimeUpdate);
